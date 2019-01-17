@@ -23,6 +23,7 @@ public class CarShowServiceHelper {
     ObjectMapper mapper = new ObjectMapper();
     List<CarShow> carShows;
 
+    // Uses the jackson library to deserialize the json into a list of CarShow objects
     try {
       carShows = mapper.readValue(carShowsJson, new TypeReference<List<CarShow>>() {});
     } catch (IOException exception) {
@@ -30,6 +31,7 @@ public class CarShowServiceHelper {
               String.format("Failed to parse car show json: %s", exception.getMessage()));
     }
 
+    // Convert the car shows list into a list of unique cars sorted by car make
     List<Car> cars = carShows
         .stream()
         .flatMap(carShow -> carShow.getCars().stream())
@@ -37,6 +39,7 @@ public class CarShowServiceHelper {
         .sorted(Comparator.comparing(Car::getMake))
         .collect(Collectors.toList());
 
+    // Create a list of shows for each car and add them to its shows list
     for (Car car : cars) {
       List<String> shows = carShows
           .stream()
