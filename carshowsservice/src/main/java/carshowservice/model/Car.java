@@ -4,8 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Car {
-    private String make = "Unknown Make";
-    private String model = "Unknown Model";
+    public static String DEFAULT_MAKE = "Unknown Make";
+    public static String DEFAULT_MODEL = "Unknown Model";
+
+    private String make = DEFAULT_MAKE;
+
+    private String model = DEFAULT_MODEL;
     private List<String> shows = new ArrayList<>();
 
     public String getMake() {
@@ -14,6 +18,14 @@ public class Car {
 
     public String getModel() {
         return model;
+    }
+
+    public void setMake(String make) {
+        this.make = make;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
     }
 
     public List<String> getShows() {

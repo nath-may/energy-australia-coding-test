@@ -13,7 +13,13 @@ import java.util.stream.Collectors;
 public class CarShowServiceHelper {
     public static List<Car> createCarShowsList(String carShowsJson) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
-        List<CarShow> carShows = mapper.readValue(carShowsJson, new TypeReference<List<CarShow>>(){});
+        List<CarShow> carShows;
+
+        try {
+            carShows = mapper.readValue(carShowsJson, new TypeReference<List<CarShow>>(){});
+        } catch(IOException exception) {
+            throw new IOException(String.format("Failed to parse car show json: %s", exception.getMessage()));
+        }
 
         List<Car> cars = carShows
                 .stream()

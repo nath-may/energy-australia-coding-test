@@ -3,7 +3,9 @@ package carshowservice.model;
 import java.util.List;
 
 public class CarShow {
-    private String name = "Unknown Car Show";
+    public static String DEFAULT_CAR_SHOW_NAME = "Unknown Car Show";
+
+    private String name = DEFAULT_CAR_SHOW_NAME;
     private List<Car> cars;
 
     public String getName() {
